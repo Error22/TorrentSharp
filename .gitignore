@@ -1,0 +1,8 @@
+packages
+.idea
+.vs
+*.user
+TorrentSharp/bin
+TorrentSharp/obj
+TorrentSharp.Example/bin
+TorrentSharp.Example/obj
