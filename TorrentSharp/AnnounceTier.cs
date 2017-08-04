@@ -6,11 +6,9 @@ namespace TorrentSharp
     {
         public IList<Tracker> Trackers { get; }
 
-        internal AnnounceTier(IEnumerable<string> trackers)
+        internal AnnounceTier(IList<Tracker> trackers)
         {
-            Trackers = new List<Tracker>();
-            foreach (string tracker in trackers)
-                Trackers.Add(new Tracker(tracker));
+            Trackers = trackers;
         }
     }
 }
