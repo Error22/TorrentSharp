@@ -14,7 +14,6 @@ namespace TorrentSharp
         public long TotalSize => _btorrent.TotalSize;
         public byte[] InfoHashBytes => _btorrent.OriginalInfoHashBytes;
 
-
         internal Torrent(TorrentClient client, BTorrent btorrent)
         {
             _client = client;

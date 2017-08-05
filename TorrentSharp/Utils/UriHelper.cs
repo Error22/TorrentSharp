@@ -7,7 +7,7 @@ namespace TorrentSharp.Utils
 {
     internal static class UriHelper
     {
-        internal static readonly char[] HexChars = "0123456789abcdef".ToCharArray();
+        private static readonly char[] HexChars = "0123456789abcdef".ToCharArray();
 
         internal static void AddParam(ref string url, string name, string value)
         {
