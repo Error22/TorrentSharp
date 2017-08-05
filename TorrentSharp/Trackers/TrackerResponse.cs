@@ -44,7 +44,7 @@ namespace TorrentSharp.Trackers
                 for (int i = 0; i < data.Count; i += 6)
                 {
                     string ip = $"{data[i]}.{data[i + 1]}.{data[i + 2]}.{data[i + 3]}";
-                    int port = (data[i + 5] << 8) + data[i + 4];
+                    int port = (data[i + 4] << 8) + data[i + 5];
                     peers.Add(new PeerInfo(null, ip, port));
                 }
             }
