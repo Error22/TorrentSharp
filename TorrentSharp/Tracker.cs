@@ -9,10 +9,12 @@ namespace TorrentSharp
         private readonly TorrentClient _client;
         private readonly HttpClient _httpClient;
         public string AnnounceUrl { get; }
+        public bool Compact { get; set; }
 
         internal Tracker(TorrentClient client, string announceUrl)
         {
             _client = client;
+            Compact = _client.CompactByDefault;
             AnnounceUrl = announceUrl;
             _httpClient = new HttpClient();
         }
@@ -28,7 +30,7 @@ namespace TorrentSharp
             UriHelper.AddParam(ref url, "uploaded", "0");
             UriHelper.AddParam(ref url, "downloaded", "0");
             UriHelper.AddParam(ref url, "left", torrent.TotalSize.ToString());
-            UriHelper.AddParam(ref url, "compact", "1");
+            UriHelper.AddParam(ref url, "compact", Compact ? "1" : "0");
             UriHelper.AddParam(ref url, "event", "started");
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);

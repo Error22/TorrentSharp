@@ -14,6 +14,7 @@ namespace TorrentSharp
         public int Port { get; private set; } = -1;
         private readonly IDictionary<string, Tracker> _trackers;
         public IReadOnlyCollection<Tracker> Trackers => _trackers.Values.AsReadOnly();
+        public bool CompactByDefault { get; } = true;
 
         public TorrentClient()
         {
