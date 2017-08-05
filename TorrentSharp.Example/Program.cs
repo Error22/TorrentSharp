@@ -14,8 +14,7 @@ namespace TorrentSharp.Example
             client.Start(6881);
 
             Torrent torrent = client.LoadTorrentFile("ubuntu-17.04-desktop-amd64.iso.torrent");
-            Tracker tracker = torrent.AnnounceTiers[0].Trackers[0];
-            TrackerResponse response = tracker.Announce(torrent);
+            TrackerResponse response = torrent.Announce();
 
             Console.WriteLine($"Success: {response.Success}");
 
