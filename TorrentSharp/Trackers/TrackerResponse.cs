@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BencodeNET.Objects;
 
-namespace TorrentSharp
+namespace TorrentSharp.Trackers
 {
     public class TrackerResponse
     {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BencodeNET.Objects;
 
-namespace TorrentSharp
+namespace TorrentSharp.Trackers
 {
     public class Tracker
     {

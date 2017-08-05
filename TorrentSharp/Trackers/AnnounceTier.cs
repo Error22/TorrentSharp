@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TorrentSharp
+namespace TorrentSharp.Trackers
 {
     public class AnnounceTier
     {

@@ -1,4 +1,4 @@
-﻿namespace TorrentSharp
+﻿namespace TorrentSharp.Trackers
 {
     public class PeerInfo
     {
