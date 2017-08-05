@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using BencodeNET.Objects;
 using TorrentSharp.Utils;
@@ -40,6 +41,10 @@ namespace TorrentSharp.Trackers
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
             HttpResponseMessage rawResponse = Task.Run(() => _httpClient.SendAsync(request)).Result;
             byte[] rawBytes = Task.Run(() => rawResponse.Content.ReadAsByteArrayAsync()).Result;
+
+            if (!rawResponse.IsSuccessStatusCode)
+                return new TrackerResponse(
+                    $"HTTP Error - {rawResponse.StatusCode}: {rawResponse.ReasonPhrase} - {Encoding.UTF8.GetString(rawBytes)}");
 
             TrackerResponse response = new TrackerResponse((BDictionary) _client.BencodeParser.Parse(rawBytes));
             if (response.TrackerId != null)

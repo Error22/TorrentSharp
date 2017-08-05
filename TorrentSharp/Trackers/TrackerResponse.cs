@@ -5,6 +5,7 @@ namespace TorrentSharp.Trackers
 {
     public class TrackerResponse
     {
+        public bool Success => FailureReason == null;
         public string FailureReason { get; }
         public string WarningMessage { get; }
         public int Interval { get; }
@@ -13,6 +14,15 @@ namespace TorrentSharp.Trackers
         public int Complete { get; }
         public int InComplete { get; }
         public IReadOnlyList<PeerInfo> Peers { get; }
+
+        internal TrackerResponse(string failureReason)
+        {
+            FailureReason = failureReason;
+            Interval = -1;
+            MinInterval = -1;
+            Complete = -1;
+            InComplete = -1;
+        }
 
         internal TrackerResponse(BDictionary dictionary)
         {
@@ -25,9 +35,12 @@ namespace TorrentSharp.Trackers
             InComplete = (int) (((BNumber) dictionary["incomplete"])?.Value ?? -1);
 
             IBObject peersObject = dictionary["peers"];
+            if (peersObject == null)
+                return;
+
             List<PeerInfo> peers = new List<PeerInfo>();
             Peers = peers;
-            
+
             if (peersObject is BString)
             {
                 IReadOnlyList<byte> data = ((BString) peersObject).Value;
