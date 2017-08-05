@@ -9,7 +9,7 @@ namespace TorrentSharp
 {
     public class TorrentClient
     {
-        internal BencodeParser BencodeParser;
+        internal readonly BencodeParser BencodeParser;
         public string PeerId { get; set; }
         public string Ip { get; set; }
         public int Port { get; private set; } = -1;
