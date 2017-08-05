@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace TorrentSharp
+namespace TorrentSharp.Utils
 {
     internal static class ReadOnlyCollectionWrapper
     {

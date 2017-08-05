@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BencodeNET.Objects;
+using TorrentSharp.Utils;
 
 namespace TorrentSharp.Trackers
 {

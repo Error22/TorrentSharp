@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TorrentSharp.Trackers;
 using BTorrent = BencodeNET.Torrents.Torrent;
 
 namespace TorrentSharp

@@ -1,4 +1,7 @@
-﻿namespace TorrentSharp.Example
+﻿using System;
+using TorrentSharp.Trackers;
+
+namespace TorrentSharp.Example
 {
     class Program
     {
@@ -9,6 +12,12 @@
                 PeerId = "-CS1000-000000000000"
             };
             client.Start(6881);
+
+            Torrent torrent = client.LoadTorrentFile("ubuntu-17.04-desktop-amd64.iso.torrent");
+            Tracker tracker = torrent.AnnounceTiers[0].Trackers[0];
+            tracker.Announce(torrent);
+
+            Console.Read();
         }
     }
 }

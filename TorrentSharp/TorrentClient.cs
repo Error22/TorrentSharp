@@ -1,7 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using BencodeNET.Parsing;
+using TorrentSharp.Trackers;
+using TorrentSharp.Utils;
 using BTorrent = BencodeNET.Torrents.Torrent;
 
 namespace TorrentSharp
