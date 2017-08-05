@@ -44,9 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnounceTier.cs" />
+    <Compile Include="PeerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyCollection.cs" />
     <Compile Include="Torrent.cs" />
+    <Compile Include="TorrentClient.cs" />
     <Compile Include="Tracker.cs" />
+    <Compile Include="TrackerResponse.cs" />
+    <Compile Include="UriHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

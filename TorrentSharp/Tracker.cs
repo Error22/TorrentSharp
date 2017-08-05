@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using BencodeNET.Objects;
 
 namespace TorrentSharp
 {
@@ -34,7 +35,7 @@ namespace TorrentSharp
             HttpResponseMessage response = Task.Run(() => _httpClient.SendAsync(request)).Result;
             byte[] rawBytes = Task.Run(() => response.Content.ReadAsByteArrayAsync()).Result;
 
-            return null;
+            return new TrackerResponse((BDictionary) _client.BencodeParser.Parse(rawBytes));
         }
     }
 }
