@@ -9,7 +9,7 @@ namespace TorrentSharp.Example
         {
             TorrentClient client = new TorrentClient
             {
-                PeerId = "-CS1000-000000000000"
+                PeerId = "-ts1000-abcdefghijkl"
             };
             client.Start(6881);
 
@@ -17,6 +17,8 @@ namespace TorrentSharp.Example
             TrackerResponse response = torrent.Announce();
 
             Console.WriteLine($"Success: {response.Success}");
+
+            Peer peer = new Peer(client, torrent, response.Peers[0]);
 
             Console.Read();
         }
