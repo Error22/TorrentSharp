@@ -11,8 +11,9 @@ namespace TorrentSharp
     {
         internal readonly BencodeParser BencodeParser;
         public string PeerId { get; set; }
-        public string Ip { get; set; }
-        public int Port { get; private set; } = -1;
+        public string ExternalIp { get; set; }
+        public int ExternalPort { get; set; }
+        public int InternalPort { get; private set; } = -1;
         private readonly IDictionary<string, Tracker> _trackers;
         public IReadOnlyCollection<Tracker> Trackers => _trackers.Values.AsReadOnly();
         public bool CompactByDefault { get; } = true;
@@ -25,7 +26,7 @@ namespace TorrentSharp
 
         public void Start(int port)
         {
-            Port = port;
+            InternalPort = port;
         }
 
         internal Tracker GetOrCreateTracker(string announceUrl)

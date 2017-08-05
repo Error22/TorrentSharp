@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BencodeNET.Objects;
@@ -27,9 +27,9 @@ namespace TorrentSharp.Trackers
             string url = AnnounceUrl;
             UriHelper.AddParam(ref url, "info_hash", UriHelper.UrlEncode(torrent.InfoHashBytes));
             UriHelper.AddParam(ref url, "peer_id", _client.PeerId);
-            if (_client.Ip != null)
-                UriHelper.AddParam(ref url, "ip", _client.Ip);
-            UriHelper.AddParam(ref url, "port", _client.Port.ToString());
+            if (_client.ExternalIp != null)
+                UriHelper.AddParam(ref url, "ip", _client.ExternalIp);
+            UriHelper.AddParam(ref url, "port", _client.ExternalPort.ToString());
             UriHelper.AddParam(ref url, "uploaded", "0");
             UriHelper.AddParam(ref url, "downloaded", "0");
             UriHelper.AddParam(ref url, "left", torrent.TotalSize.ToString());
