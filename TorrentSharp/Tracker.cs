@@ -10,6 +10,7 @@ namespace TorrentSharp
         private readonly HttpClient _httpClient;
         public string AnnounceUrl { get; }
         public bool Compact { get; set; }
+        public string TrackerId { get; set; }
 
         internal Tracker(TorrentClient client, string announceUrl)
         {
@@ -32,12 +33,17 @@ namespace TorrentSharp
             UriHelper.AddParam(ref url, "left", torrent.TotalSize.ToString());
             UriHelper.AddParam(ref url, "compact", Compact ? "1" : "0");
             UriHelper.AddParam(ref url, "event", "started");
+            if (TrackerId != null)
+                UriHelper.AddParam(ref url, "trackerid", TrackerId);
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-            HttpResponseMessage response = Task.Run(() => _httpClient.SendAsync(request)).Result;
-            byte[] rawBytes = Task.Run(() => response.Content.ReadAsByteArrayAsync()).Result;
+            HttpResponseMessage rawResponse = Task.Run(() => _httpClient.SendAsync(request)).Result;
+            byte[] rawBytes = Task.Run(() => rawResponse.Content.ReadAsByteArrayAsync()).Result;
 
-            return new TrackerResponse((BDictionary) _client.BencodeParser.Parse(rawBytes));
+            TrackerResponse response = new TrackerResponse((BDictionary) _client.BencodeParser.Parse(rawBytes));
+            if (response.TrackerId != null)
+                TrackerId = response.TrackerId;
+            return response;
         }
     }
 }
