@@ -7,10 +7,10 @@ namespace TorrentSharp.Example
     {
         static void Main(string[] args)
         {
-            TorrentClient client = new TorrentClient
-            {
-                PeerId = "-ts1000-abcdefghijkl"
-            };
+            Console.WriteLine("TorrentSharp Example");
+            TorrentClient client = new TorrentClient();
+            Console.WriteLine($"PeerId: {client.PeerId}");
+
             client.Start(6881);
 
             Torrent torrent = client.LoadTorrentFile("ubuntu-17.04-desktop-amd64.iso.torrent");

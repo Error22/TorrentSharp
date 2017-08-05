@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using BencodeNET.Parsing;
 using TorrentSharp.Trackers;
@@ -9,6 +10,9 @@ namespace TorrentSharp
 {
     public class TorrentClient
     {
+        private static readonly char[] IdChars =
+            "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM".ToCharArray();
+
         internal readonly BencodeParser BencodeParser;
         public string PeerId { get; set; }
         public string ExternalIp { get; set; }
@@ -22,6 +26,12 @@ namespace TorrentSharp
         {
             BencodeParser = new BencodeParser();
             _trackers = new ConcurrentDictionary<string, Tracker>();
+
+            Random random = new Random();
+            char[] rand = new char[12];
+            for (int i = 0; i < rand.Length; i++)
+                rand[i] = IdChars[random.Next(IdChars.Length)];
+            PeerId = $"-ts1000-{new string(rand)}";
         }
 
         public void Start(int port)
