@@ -8,31 +8,27 @@ namespace TorrentSharp.Trackers
         public bool Success => FailureReason == null;
         public string FailureReason { get; }
         public string WarningMessage { get; }
-        public int Interval { get; }
-        public int MinInterval { get; }
+        public int? Interval { get; }
+        public int? MinInterval { get; }
         public string TrackerId { get; }
-        public int Complete { get; }
-        public int InComplete { get; }
+        public int? Complete { get; }
+        public int? InComplete { get; }
         public IReadOnlyList<PeerInfo> Peers { get; }
 
         internal TrackerResponse(string failureReason)
         {
             FailureReason = failureReason;
-            Interval = -1;
-            MinInterval = -1;
-            Complete = -1;
-            InComplete = -1;
         }
 
         internal TrackerResponse(BDictionary dictionary)
         {
             FailureReason = ((BString) dictionary["failure reason"])?.ToString();
             WarningMessage = ((BString) dictionary["warning message"])?.ToString();
-            Interval = (int) (((BNumber) dictionary["interval"])?.Value ?? -1);
-            MinInterval = (int) (((BNumber) dictionary["min interval"])?.Value ?? -1);
+            Interval = (int?) ((BNumber) dictionary["interval"])?.Value;
+            MinInterval = (int?) ((BNumber) dictionary["min interval"])?.Value;
             TrackerId = ((BString) dictionary["tracker id"])?.ToString();
-            Complete = (int) (((BNumber) dictionary["complete"])?.Value ?? -1);
-            InComplete = (int) (((BNumber) dictionary["incomplete"])?.Value ?? -1);
+            Complete = (int?) ((BNumber) dictionary["complete"])?.Value;
+            InComplete = (int?) ((BNumber) dictionary["incomplete"])?.Value;
 
             IBObject peersObject = dictionary["peers"];
             if (peersObject == null)
